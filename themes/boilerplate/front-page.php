@@ -7,9 +7,9 @@
       
     </div>
 
-    <?php get_template_part( 'partials/partial' ); ?>
+    <?php get_template_part( 'template-parts/partial' ); ?>
     <?php // Use include if variables need to be passed on to partial ?>
-    <?php include(locate_template('partials/partial')); ?>
+    <?php include(locate_template('template-parts/partial')); ?>
 
   </main>
  
