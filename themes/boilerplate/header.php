@@ -26,7 +26,7 @@
 	<body <?php body_class(); ?>>
 
 		<!-- wrapper -->
-		<div class="uk-container">
+		<div class="wrapper">
 
 			<!-- header -->
 			<header class="header clear" role="banner">

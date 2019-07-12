@@ -1,15 +1,13 @@
 <?php get_header(); ?>
 <!-- +++front-page -->
 
-  <main class="uk-container">
-
-    <div class="">
-      
-    </div>
-
-    <?php get_template_part( 'template-parts/partial' ); ?>
+  <section class="l-banner">
+    <?php get_template_part( 'template-parts/banner--home' ); ?>
     <?php // Use include if variables need to be passed on to partial ?>
-    <?php include(locate_template('template-parts/partial')); ?>
+    <?php //include(locate_template('template-parts/partial')); ?>
+  </section>
+
+  <main class="uk-container">
 
   </main>
  
