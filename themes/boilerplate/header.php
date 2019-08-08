@@ -13,38 +13,56 @@
 		<meta name="description" content="<?php bloginfo('description'); ?>">
 
 		<?php wp_head(); ?>
-		<script>
-        // conditionizr.com
-        // configure environment tests
-        conditionizr.config({
-            assets: '<?php echo get_template_directory_uri(); ?>',
-            tests: {}
-        });
-        </script>
 
 	</head>
+
 	<body <?php body_class(); ?>>
 
-		<!-- wrapper -->
-		<div class="wrapper">
+	<header class="l-header">
+    <section class="container-fluid">
+    <div class="sticky-top">
+      <nav class="l-nav row">
 
-			<!-- header -->
-			<header class="header clear" role="banner">
+        <div class="col-3">
+          <div class="navbar justify-content-start">
+          <?php 
+            wp_nav_menu( array(
+              'menu' => 'social',
+              'menu_class' => 'nav'
+            ) ); 
+          ?>
+          </div>
+        </div>
+        
+        <div class="col-6">
+          <div class="navbar justify-content-center">
+          <?php 
+            wp_nav_menu( array(
+              'menu' => 'primary',
+              'menu_class' => 'nav'
+            ) ); 
+          ?>
+          </div>
+        </div>
+          
+        <div class="col-3">
+          <div class="navbar justify-content-end">
+            <ul class="nav">
+              <?php if(!function_exists('dynamic_sidebar') || !dynamic_sidebar('header-widget')) ?>
+            </ul>
+          </div>
+        </div>
 
-					<!-- logo -->
-					<div class="logo">
-						<a href="<?php echo home_url(); ?>">
-							<!-- svg logo - toddmotto.com/mastering-svg-use-for-a-retina-web-fallbacks-with-png-script -->
-							<img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo" class="logo-img">
-						</a>
-					</div>
-					<!-- /logo -->
+      </nav>
+    </div>
+    </section>
 
-					<!-- nav -->
-					<nav class="nav" role="navigation">
-						<?php html5blank_nav(); ?>
-					</nav>
-					<!-- /nav -->
+    <section class="l-banner--main jumbotron d-flex justify-content-center align-items-center">
+      
+        <div class="flex-item">
+          <a href="<?php echo get_site_url(); ?>"><?php bloginfo( ‘name’ ); ?></a>
+        </div>
+      
+    </section>
 
-			</header>
-			<!-- /header -->
+  </header>

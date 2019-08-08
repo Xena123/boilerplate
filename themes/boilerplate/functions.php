@@ -116,15 +116,23 @@ function html5blank_conditional_scripts()
 function html5blank_styles()
 {
     wp_enqueue_style('normalize', '//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
-    wp_enqueue_style('font-awesome', '//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-    wp_enqueue_style('uikit-style', get_template_directory_uri().'/assets/vendor/uikit.min.css');
-    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Poppins:300,400,700&display=swap', false ); 
+    //wp_enqueue_style('font-awesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    wp_enqueue_style('bootstrap-style', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+    wp_enqueue_style( 'google-montserrat', 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap', false ); 
+    wp_enqueue_style( 'google-kristi', 'https://fonts.googleapis.com/css?family=Kristi&display=swap', false ); 
 
     wp_enqueue_style( 'main-style', get_template_directory_uri().'/assets/dist/css/main.min.css');
 
-    wp_register_script('uikit-script', 'https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js', false);
-    wp_register_script('uikit-icons', 'https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js', false);
+    
 }
+
+
+function wmpudev_enqueue_icon_stylesheet() {
+    wp_register_style( 'fontawesome', 'http:////maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
+    wp_enqueue_style( 'fontawesome');
+}
+add_action( 'wp_enqueue_scripts', 'wmpudev_enqueue_icon_stylesheet' );
+
 
 // Register HTML5 Blank Navigation
 function register_html5_menu()
@@ -132,7 +140,8 @@ function register_html5_menu()
     register_nav_menus(array( // Using array to specify more menus if needed
         'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation
         'sidebar-menu' => __('Sidebar Menu', 'html5blank'), // Sidebar Navigation
-        'extra-menu' => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
+        'extra-menu' => __('Extra Menu', 'html5blank'), // Extra Navigation if needed (duplicate as many as you need!)
+        'social-menu' => __('Social Menu', 'html5blank')
     ));
 }
 
@@ -178,9 +187,19 @@ if (function_exists('register_sidebar'))
 {
     // Define Sidebar Widget Area 1
     register_sidebar(array(
-        'name' => __('Widget Area 1', 'html5blank'),
-        'description' => __('Description for this widget-area...', 'html5blank'),
-        'id' => 'widget-area-1',
+        'name' => __('Header Widget', 'html5blank'),
+        'description' => __('', 'html5blank'),
+        'id' => 'header-widget',
+        //'before_widget' => '<div id="%1$s" class="%2$s">',
+        //'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>'
+    ));
+
+    register_sidebar(array(
+        'name' => __('Sidebar Widget 1', 'html5blank'),
+        'description' => __('', 'html5blank'),
+        'id' => 'sidebar-widget-1',
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget' => '</div>',
         'before_title' => '<h3>',
@@ -189,9 +208,9 @@ if (function_exists('register_sidebar'))
 
     // Define Sidebar Widget Area 2
     register_sidebar(array(
-        'name' => __('Widget Area 2', 'html5blank'),
-        'description' => __('Description for this widget-area...', 'html5blank'),
-        'id' => 'widget-area-2',
+        'name' => __('Sidebar Widget 2', 'html5blank'),
+        'description' => __('', 'html5blank'),
+        'id' => 'sidebar-widget-2',
         'before_widget' => '<div id="%1$s" class="%2$s">',
         'after_widget' => '</div>',
         'before_title' => '<h3>',
@@ -256,12 +275,6 @@ function html5_blank_view_article($more)
 {
     global $post;
     return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'html5blank') . '</a>';
-}
-
-// Remove Admin bar
-function remove_admin_bar()
-{
-    return true;
 }
 
 // Remove 'text/css' from our enqueued stylesheet
@@ -373,14 +386,14 @@ add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (S
 add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sidebar
 add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
 add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
-// add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected classes (Commented out by default)
-// add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected ID (Commented out by default)
-// add_filter('page_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> Page ID's (Commented out by default)
+//add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected classes (Commented out by default)
+add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected ID (Commented out by default)
+add_filter('page_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> Page ID's (Commented out by default)
 add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
-add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
+//add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
 add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images

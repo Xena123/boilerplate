@@ -1,0 +1,13 @@
+.widget_shopping_cart {
+  &:before {
+      display: inline-block;
+      font-family: FontAwesome;
+      float: left;
+      content: "\f07a";
+      font-weight: 300;
+      margin-right: 1em;
+  }
+  .woocommerce-mini-cart__empty-message {
+    font-size: 0;
+  }
+}

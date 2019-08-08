@@ -1,3 +1,11 @@
-#l-banner--text {
-  color: #fff;
+.l-banner--main {
+  margin-bottom: 0;
+  background-color: #FAF9F7;
+  font-family: 'Kristi', cursive;
+  font-size: 70px;
+  height: 260px;
+  a {
+    color: #000;
+    text-decoration: none;
+  }
 }

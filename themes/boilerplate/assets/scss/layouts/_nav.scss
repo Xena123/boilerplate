@@ -1,0 +1,27 @@
+.l-nav {
+  align-items: center;
+  li {
+    padding: 10px 0;
+    a {
+      font-size: 13px;
+      padding: 10px;
+      text-decoration: none;
+      color: #000;
+      text-transform: uppercase;
+    }
+  }
+}
+
+#menu-primary {
+  margin-bottom: 0;
+}
+
+#menu-social {
+  li:before {
+    font-size: 16px;
+  }
+  a {
+    font-size: 0;
+  }
+
+}

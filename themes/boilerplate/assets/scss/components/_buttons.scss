@@ -1,0 +1,19 @@
+.btn {
+  a {
+    color: #000;
+    text-transform: uppercase;
+    font-size: 11px;
+    padding: 15px;
+  }
+}
+
+.btn--more {
+  border: 1px solid #CCBC89;
+  &:hover {
+    background-color: #CCBC89;
+    a {
+      color: #fff !important;
+    }
+    
+  }
+}

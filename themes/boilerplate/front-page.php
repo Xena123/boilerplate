@@ -1,14 +1,31 @@
 <?php get_header(); ?>
 <!-- +++front-page -->
 
-  <section class="l-banner">
+  <section>
     <?php get_template_part( 'template-parts/banner--home' ); ?>
-    <?php // Use include if variables need to be passed on to partial ?>
-    <?php //include(locate_template('template-parts/partial')); ?>
   </section>
 
-  <main class="uk-container">
+  <main class="container">
+    <div class="row">
+    <div class="col-8">
 
+
+      <?php $custom_query = new WP_Query('posts_per_page=5&cat=-21'); // exclude category 21
+      while($custom_query->have_posts()) : $custom_query->the_post(); ?>
+
+        <h1><?php the_title(); ?></h1>
+        <div class="post--content">
+          <?php the_content(); ?>
+        </div>
+      <?php endwhile; ?>
+      <?php wp_reset_postdata(); // reset the query ?>
+
+    </div>
+
+    <aside class="sidebar col-4" role="complementary">
+      <?php get_template_part( 'sidebar' ); ?>
+    </aside>
+    </div>
   </main>
  
 <?php get_footer(); ?>
